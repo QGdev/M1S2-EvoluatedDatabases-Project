@@ -1,10 +1,19 @@
 === Les 4 datasets utilisés
 * https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/CO2_emission.csv[Co2 emissions] 
 * https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/countries_gdp_hist.csv[PIB par pays par année] 
-* https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/Human%20Development%20Index%20-%20Full.csv[IDH par pays par année] 
+* https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/Human%20Development%20Index%20-%20Full.csv[IDH par pays par année]
+* Le dataset sur les populations était trop lourd pour être téléchargé, plude détails dans la section suivante
+
+==== Le dataset sur les populations
+Comme décrit précédement, ce dataset était trop volumineux pour être chargé sur Git.
+Le site http://data.un.org/[UNData] impose une limite de téléchargement de 100.000 lignes d'enregistrements, le dataset en contient environ 2 millions, nous avons donc créé des scripts permettant de récupérer ces derniers.
+
+Nous avons choisi de télécharger ce dataset par parties en le divisant par années.
+Cette partie a été prise en charge par le script À_CHANGER_APRÈS_PUSH[download_script.sh] permettant de télécharger tous les parties du dataset.
+Un autre script a été nécéssaire pour formater les fichiers téléchargés afin que ces derniers soient utilisables par d'autres programmes plus tard, ce script est À_CHANGER_APRÈS_PUSH[conversion_files_script.sh].
 
 === Les liens vers les sites sources
 * https://www.kaggle.com/datasets/koustavghosh149/co2-emission-around-the-world[Co2 emissions par pays par année] 
 * https://www.kaggle.com/datasets/fredericksalazar/pib-gdp-global-by-countries-since-1960-to-2021[PIB par pays par année] 
 * https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH par pays par année] 
-* http://data.un.org/Data.aspx?d=POP&f=tableCode%3a1[Population par pays par année par tranche d'âge] 
+* http://data.un.org/Data.aspx?d=POP&f=tableCode%3a22[Population par pays par genre par année par tranche d'âge par zone d'habitation] 
