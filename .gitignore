@@ -1,0 +1,4 @@
+__pycache__
+**/population_dataset/csv/*
+**/population_dataset/csv_processed/*
+**/population_dataset/downloaded/*
