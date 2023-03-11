@@ -9,7 +9,7 @@ from io import TextIOWrapper
 #   Advanced Databases Project
 #
 #   Converts CSV files into INSERTS SQL file(s)
-#   for the HDI dataset from Kaggle
+#   for the HDI and GNI dataset from Kaggle
 #
 #   Author: Quentin GOMES DOS REIS
 #
@@ -48,7 +48,7 @@ def process_header_line(head_line: list[str], columns_to_get: dict) -> dict:
 #   \            \             \
 #    \            \             \
 #     \            \             \
-#      \            Category2...  Year2 : 0.534
+#      \            GNI           Year2 : 0.534
 #       \
 #        Country2------HDI
 #
@@ -60,10 +60,15 @@ def process_data(data_in: list[list], categories: dict, data_types: dict) -> dic
         if(data.get(row[1]) is None):
             data[row[0]] = {}
 
+        #   Take each categories
         for category in categories.keys():
             data[row[0]][category] = {}
+
+            #   Take each year of the current category
             for year in categories[category].keys():
                 tmp = row[categories[category][year]]
+
+                #   Convert each values in the proper type
                 if(type(tmp) is str):
                     if(tmp == ""):
                         data[row[0]][category][year] = None
@@ -85,7 +90,7 @@ def process_data(data_in: list[list], categories: dict, data_types: dict) -> dic
 #
 #   WARNING: DON'T SET A SMALL NUMBER FOR THE LIMIT, WILL FILL YOUR STORAGE WITH A LOT OF FILES !
 ##   Will take the resulting tree and fill the provided file with sql INSERTS
-def build_sql_hdi_data(files_path: str, processed_data: dict, nb_lines_per_files: int) -> None:
+def build_sql_hdi_data(files_path: str, processed_data: dict, nb_lines_per_files: int = 250000) -> None:
 
     insert_request_to_format = "INSERT INTO hdi_stats VALUES ('{}', {}, {});\n"
 
@@ -102,9 +107,6 @@ def build_sql_hdi_data(files_path: str, processed_data: dict, nb_lines_per_files
 
             if (value is None):
                 value = "NULL"
-            elif isinstance(value, str):
-                value = "'{}'".format(value)
-                
 
             file.write(str(insert_request_to_format).format(country, year, value))
             nb_lines_written_in_file+=1
@@ -114,6 +116,42 @@ def build_sql_hdi_data(files_path: str, processed_data: dict, nb_lines_per_files
                 current_file_number += 1
                 nb_lines_written_in_file = 0
                 file = open(files_path.format(current_file_number), "w")
+    file.close()
+
+#   Will take the resulting tree and create files of lines limit
+#   Each created files will have exactly the setted limit in it
+#
+#   WARNING: DON'T SET A SMALL NUMBER FOR THE LIMIT, WILL FILL YOUR STORAGE WITH A LOT OF FILES !
+##   Will take the resulting tree and fill the provided file with sql INSERTS
+def build_sql_gni_data(files_path: str, processed_data: dict, nb_lines_per_files: int = 250000) -> None:
+
+    insert_request_to_format = "INSERT INTO gni_stats VALUES ('{}', {}, '{}', {});\n"
+
+    values_categories = {"GNI" : "Global", "GNI_F" : "Female", "GNI_M" : "Male"}
+
+    current_file_number = 0
+    nb_lines_written_in_file = 0
+
+    file = open(files_path.format(current_file_number), "w")
+            
+    #   Scan each ends of the provided tree
+    for country in processed_data.keys():  
+        for category in values_categories:    
+            for year in processed_data[country][category].keys():
+                
+                value = processed_data[country][category][year]
+
+                if (value is None):
+                    value = "NULL"
+                    
+                file.write(str(insert_request_to_format).format(country, year, values_categories[category], value))
+                nb_lines_written_in_file+=1
+
+                if(nb_lines_written_in_file >= nb_lines_per_files):
+                    file.close()
+                    current_file_number += 1
+                    nb_lines_written_in_file = 0
+                    file = open(files_path.format(current_file_number), "w")
     file.close()
 
 
@@ -148,15 +186,17 @@ if __name__ == '__main__':
     csv_data = open_csv_file(file)
     print("Processing file")
 
-    print(csv_data[0])
-    categories = process_header_line(csv_data[0], {"HDI": "^(Human Development Index) \([0-9]{4}\)"})
+    categories = process_header_line(csv_data[0], {"HDI": "^(Human Development Index) \([0-9]{4}\)", 
+                                                   "GNI": "^(Gross National Income Per Capita) \([0-9]{4}\)",
+                                                   "GNI_F": "^(Gross National Income Per Capita, female) \([0-9]{4}\)",
+                                                   "GNI_M": "^(Gross National Income Per Capita, male) \([0-9]{4}\)"})
 
-    data = process_data(csv_data[1::], categories, {"HDI": "float"})
+    data = process_data(csv_data[1::], categories, {"HDI": "float", "GNI": "float", "GNI_F": "float", "GNI_M": "float"})
+
+    print("Building SQL files")
 
     build_sql_hdi_data(sql_folder_path + "/INS_HDI_DATA_{}.sql", data, nb_lines_per_files)
-
-    print(data)
-
+    build_sql_gni_data(sql_folder_path + "/INS_GNI_DATA_{}.sql", data, nb_lines_per_files)
     
     print("Cleanning memory")
     del csv_data
