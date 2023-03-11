@@ -57,7 +57,7 @@ def process_data(data_in: list[list], categories: dict, data_types: dict) -> dic
 
     for row in data_in:
         #   If country is not registered, register it
-        if(data.get(row[1]) is None):
+        if(data.get(row[0]) is None):
             data[row[0]] = {}
 
         #   Take each categories
