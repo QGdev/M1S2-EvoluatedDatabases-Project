@@ -14,6 +14,26 @@ from io import TextIOWrapper
 #   Author: Quentin GOMES DOS REIS
 #
 
+#   How to use:
+#       Give 3 parameters
+#
+#       - The first one is the location of the folder
+#           which contains all csv files previously
+#           processed by our bash scripts.
+#               in our case: ./scripts/get_data_scripts/population_dataset/csv_processed
+#
+#       - The second one is the location of the folder
+#           where the program will put SQL file(s)
+#               in our case: ./sql_files
+#
+#       - The third is corresponding
+#           to the limit of lines present in resulting
+#           SQL files, it is the maximum number of lines
+#           in one SQL file.
+#           Not providing a limit, will cause the creation
+#           of one huge file
+#               in our case: 250000
+#
 
 #   Needed in order to get file easily
 def get_file(file_path: str, encoding: str = "UTF-8") -> TextIOWrapper:
@@ -24,8 +44,8 @@ def open_csv_file(file: TextIOWrapper) -> list[list]:
     csv_reader = csv.reader(file)
     return [*csv_reader]
 
-#
-#
+#   Will scan the given csv header and depending on given rules 
+#   will give columns where the wanted data is 
 def process_header_line(head_line: list[str], columns_to_get: dict) -> dict:
     tmp = dict()
 
@@ -158,23 +178,20 @@ def build_sql_gni_data(files_path: str, processed_data: dict, nb_lines_per_files
 if __name__ == '__main__':
     if(len(sys.argv) < 3):
         raise Exception("Not enought parameters")
-    if(len(sys.argv) > 5):
+    if(len(sys.argv) > 3):
         raise Exception("Too many parameters")
 
     csv_file_path = str(sys.argv[1])
     sql_folder_path = str(sys.argv[2])
 
-    if(len(sys.argv) > 3):
-        nb_lines_per_files = int(sys.argv[3])
-        if(nb_lines_per_files < 1):
-            raise Exception("Size limit cannot be null or negative !")
-        #   Just to avoid potential catastrophic errors
-        if(nb_lines_per_files < 1000):
-            print("\n\033[93m WARNING : The size limit is set to {} ! \033[0m".format(nb_lines_per_files))
-            if(input("Type \"yes\" to continue or anything else to abort : ") != "yes"):
-                exit()
-    else:
-        nb_lines_per_files = None
+    nb_lines_per_files = int(sys.argv[3])
+    if(nb_lines_per_files < 1):
+        raise Exception("Size limit cannot be null or negative !")
+    #   Just to avoid potential catastrophic errors
+    if(nb_lines_per_files < 1000):
+        print("\n\033[93m WARNING : The size limit is set to {} ! \033[0m".format(nb_lines_per_files))
+        if(input("Type \"yes\" to continue or anything else to abort : ") != "yes"):
+            exit()
 
     print("\n")
 
