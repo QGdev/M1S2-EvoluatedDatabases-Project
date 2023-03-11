@@ -1,19 +1,35 @@
-=== Les 4 datasets utilisés
-* https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/CO2_emission.csv[Co2 emissions] 
-* https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/countries_gdp_hist.csv[PIB par pays par année] 
-* https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/Human%20Development%20Index%20-%20Full.csv[IDH par pays par année]
-* Le dataset sur les populations était trop lourd pour être téléchargé, plude détails dans la section suivante
 
-==== Le dataset sur les populations
-Comme décrit précédement, ce dataset était trop volumineux pour être chargé sur Git.
-Le site http://data.un.org/[UNData] impose une limite de téléchargement de 100.000 lignes d'enregistrements, le dataset en contient environ 2 millions, nous avons donc créé des scripts permettant de récupérer ces derniers.
+=== Les 3 datasets utilisés
 
-Nous avons choisi de télécharger ce dataset par parties en le divisant par années.
-Cette partie a été prise en charge par le script À_CHANGER_APRÈS_PUSH[download_script.sh] permettant de télécharger tous les parties du dataset.
-Un autre script a été nécéssaire pour formater les fichiers téléchargés afin que ces derniers soient utilisables par d'autres programmes plus tard, ce script est À_CHANGER_APRÈS_PUSH[conversion_files_script.sh].
+- https://data.worldbank.org/indicator/EN.ATM.CO2E.PC[Co2 emissions en tonne métrique par pays par année]
+* Licence utilisée: The Creative Commons Attribution-NonCommercial 4.0 *(CC BY-NC 4.0)*
 
-=== Les liens vers les sites sources
-* https://www.kaggle.com/datasets/koustavghosh149/co2-emission-around-the-world[Co2 emissions par pays par année] 
-* https://www.kaggle.com/datasets/fredericksalazar/pib-gdp-global-by-countries-since-1960-to-2021[PIB par pays par année] 
-* https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH par pays par année] 
-* http://data.un.org/Data.aspx?d=POP&f=tableCode%3a22[Population par pays par genre par année par tranche d'âge par zone d'habitation] 
+* Obtention des fichiers de données
++
+Le dataset est téléchargable sous la forme d'un fichier CSV, il est disponible https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/API_EN.ATM.CO2E.PC_DS2_en_csv_v2_4902944.csv[ici].
+
+- https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH et GNI par pays par année] 
+* Licence utilisée: Creative Commons Attribution 3.0 IGO *(CC BY 3.0 IGO)*
+
+* Obtention des fichiers de données
++
+Le dataset est téléchargable sous la forme d'un fichier CSV, il est disponible https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/Human%20Development%20Index%20-%20Full.csv[ici].
+
+- http://data.un.org/Data.aspx?d=POP&f=tableCode%3a22[Population par pays par genre par année par tranche d'âge par zone d'habitation] 
+* Licence utilisée
++
+Aucune licence prédéfinie clairement sur le site http://data.un.org/Host.aspx?Content=UNdataUse[UNdata], néanmoins la section "Term of Use" mentionne des conditions d'utilisation similaires à la licence *CC BY*.
++
+[quote,http://data.un.org/Host.aspx?Content=UNdataUse]
+=====
+_"All data and metadata provided on UNdata’s website are available free of charge and may be copied freely, duplicated and further distributed provided that UNdata is cited as the reference."_ *Term of use - UNdata*
+=====
+
+* Obtention des fichiers de données
++
+Nous avons rencontré un problème lors de la récupération des données, le dataset faisant approximativement 2 millions de lignes, le site limitant le téléchargement a 100.000 lignes, il était donc impossible de tout télécharger en un seul bloc.
++
+Nous avons donc conçu un script bash (https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/scripts/get_data_scripts/population_dataset/download_script.sh[download_script.sh]) permettant de télécharger le dataset au format csv par bloc en le découpant par années.
++
+Une fois téléchargé, il ne suffira que d'exécuter le deuxième script bash (https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/scripts/get_data_scripts/population_dataset/conversion_files_script.sh[conversion_files_script.sh]) pour rendre les fichiers utilisables par le programme python.
+
