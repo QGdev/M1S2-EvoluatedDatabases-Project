@@ -44,7 +44,7 @@ def process_header_line(head_line: list[str], columns_to_get: dict) -> dict:
 
 #   Will build a tree to store each data with a tree like a kd-tree
 #
-#   -----Country1-----------HDI------Year1 : 0.32
+#   -----Country1-----------HDI------Year1 : NULL
 #   \            \             \
 #    \            \             \
 #     \            \             \
@@ -100,18 +100,20 @@ def build_sql_hdi_data(files_path: str, processed_data: dict, nb_lines_per_files
             
             value = processed_data[country]["HDI"][year]
 
-            if(not(value is None)):
-                if isinstance(value, str):
-                    value = "'{}'".format(value)
+            if (value is None):
+                value = "NULL"
+            elif isinstance(value, str):
+                value = "'{}'".format(value)
+                
 
-                file.write(str(insert_request_to_format).format(country, year, value))
-                nb_lines_written_in_file+=1
+            file.write(str(insert_request_to_format).format(country, year, value))
+            nb_lines_written_in_file+=1
 
-                if(nb_lines_written_in_file >= nb_lines_per_files):
-                    file.close()
-                    current_file_number += 1
-                    nb_lines_written_in_file = 0
-                    file = open(files_path.format(current_file_number), "w")
+            if(nb_lines_written_in_file >= nb_lines_per_files):
+                file.close()
+                current_file_number += 1
+                nb_lines_written_in_file = 0
+                file = open(files_path.format(current_file_number), "w")
     file.close()
 
 
