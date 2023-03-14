@@ -2,7 +2,6 @@
 
 ## Description :
 
-[Insérez une description brève et concise de votre projet de base de données évolué ici. Par exemple : Mon projet de base de données évolué est une application de gestion de stock pour une entreprise de vente de chaussures en ligne. La base de données contiendra des informations sur les produits, les commandes, les clients, etc.]
 Notre projet de base de données évoluées est la réalisation d'un entrepôt de données dans l'objectif de magnipuler les requêtes OLAP et d'utiliser toutes nos connaissances apprisent lors des cours de base de données. L'entrepôt de données contiendra des données sur la production de co2 de différents pays et des données économiques sur les pays notamment le pib, l'idh.
 
 ## Fonctionnalités :
