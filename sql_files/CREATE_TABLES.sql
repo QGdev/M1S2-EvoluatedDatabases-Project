@@ -31,7 +31,7 @@ CREATE TABLE FACTS (
 --
 CREATE TABLE COUNTRY (
     id_country VARCHAR(3) NOT NULL,
-    country_name VARCHAR,
+    country_name VARCHAR(7),
     CONSTRAINT id_country_format CHECK (REGEXP_LIKE(id_country, '^[A-Z]{3}$')),
     CONSTRAINT country_name_format CHECK (REGEXP_LIKE(country_name, '^\D*$'))
 );
@@ -41,7 +41,7 @@ CREATE TABLE COUNTRY (
 --
 CREATE TABLE AGE_GROUP (
     id_age_group VARCHAR(2) NOT NULL,
-    age_group VARCHAR,
+    age_group VARCHAR(7),
     CONSTRAINT id_age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[A-Z]*$')),
     CONSTRAINT age_group_format CHECK (REGEXP_LIKE(id_age_group, '^\d+(\s*-\s*\d+)?$'))
 )
