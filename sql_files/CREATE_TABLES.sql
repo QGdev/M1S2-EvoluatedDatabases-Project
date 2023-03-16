@@ -16,7 +16,7 @@
 --
 CREATE TABLE COUNTRIES (
     id_country VARCHAR(3) NOT NULL,
-    country_name VARCHAR(7),
+    country_name VARCHAR(48),
     CONSTRAINT pk_country PRIMARY KEY (id_country),
     CONSTRAINT id_country_format CHECK (REGEXP_LIKE(id_country, '^[A-Z]{3}$'))
 );
