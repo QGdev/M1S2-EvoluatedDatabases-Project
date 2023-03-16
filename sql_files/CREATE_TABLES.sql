@@ -48,5 +48,5 @@ CREATE TABLE AGE_GROUP (
     age_group VARCHAR(7),
     CONSTRAINT pk_age_group PRIMARY KEY (id_age_group),
     CONSTRAINT id_age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[A-Z]*$')),
-    CONSTRAINT age_group_format CHECK (REGEXP_LIKE(id_age_group, '^\d+(\s*-\s*\d+)?$'))
+    CONSTRAINT age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[0-9A-Z_-]*$'))
 )
