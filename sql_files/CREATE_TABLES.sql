@@ -18,7 +18,7 @@ CREATE TABLE COUNTRIES (
     id_country VARCHAR(3) NOT NULL,
     country_name VARCHAR(7),
     CONSTRAINT pk_country PRIMARY KEY (id_country),
-    CONSTRAINT id_country_format CHECK (REGEXP_LIKE(id_country, '^[A-Z]{3}$')),
+    CONSTRAINT id_country_format CHECK (REGEXP_LIKE(id_country, '^[A-Z]{3}$'))
 );
 
 --
@@ -29,7 +29,7 @@ CREATE TABLE AGE_GROUPS (
     age_group VARCHAR(7),
     CONSTRAINT pk_age_group PRIMARY KEY (id_age_group),
     CONSTRAINT id_age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[A-Z]*$')),
-    CONSTRAINT age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[0-9A-Z_-]*$'))
+    CONSTRAINT age_group_format CHECK (REGEXP_LIKE(id_age_group, '^[0-9A-Z_ -]*$'))
 );
 
 --
@@ -44,6 +44,6 @@ CREATE TABLE FACTS (
     id_age_group VARCHAR(2) NOT NULL CHECK (REGEXP_LIKE(id_age_group, '^[A-Z]*$')),
     population_count NUMBER CHECK (population_count >= 0),
     CONSTRAINT pk_facts PRIMARY KEY (id_country, id_age_group, year),
-    CONSTRAINT fk_facts_country FOREIGN KEY (id_country) REFERENCES COUNTRY(id_country) ON DELETE CASCADE,
-    CONSTRAINT fk_facts_age_group FOREIGN KEY (id_age_group) REFERENCES AGE_GROUP(id_age_group) ON DELETE CASCADE
+    CONSTRAINT fk_facts_country FOREIGN KEY (id_country) REFERENCES COUNTRIES(id_country) ON DELETE CASCADE,
+    CONSTRAINT fk_facts_age_group FOREIGN KEY (id_age_group) REFERENCES AGE_GROUPS(id_age_group) ON DELETE CASCADE
 );
