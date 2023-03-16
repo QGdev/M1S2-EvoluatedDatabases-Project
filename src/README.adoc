@@ -1,35 +1,29 @@
 
 === Les 3 datasets utilisés
 
-- https://data.worldbank.org/indicator/EN.ATM.CO2E.PC[Co2 emissions en tonne métrique par pays par année]
-* Licence utilisée: The Creative Commons Attribution-NonCommercial 4.0 *(CC BY-NC 4.0)*
-
-* Obtention des fichiers de données
-+
-Le dataset est téléchargable sous la forme d'un fichier CSV, il est disponible https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/API_EN.ATM.CO2E.PC_DS2_en_csv_v2_4902944.csv[ici].
-
-- https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH et GNI par pays par année] 
+- https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH, GNI CO² par pays par année] 
 * Licence utilisée: Creative Commons Attribution 3.0 IGO *(CC BY 3.0 IGO)*
 
 * Obtention des fichiers de données
 +
-Le dataset est téléchargable sous la forme d'un fichier CSV, il est disponible https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/Human%20Development%20Index%20-%20Full.csv[ici].
+Le dataset est téléchargable sous la forme d'un fichier CSV, il est disponible https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/src/POP_FIVE_HIST_13032023185442226.csv[ici].
 
-- http://data.un.org/Data.aspx?d=POP&f=tableCode%3a22[Population par pays par genre par année par tranche d'âge par zone d'habitation] 
+
+- https://stats.oecd.org/Index.aspx?DataSetCode=HISTPOP#[Population par pays par genre par année par tranche d'âge] 
 * Licence utilisée
 +
-Aucune licence prédéfinie clairement sur le site http://data.un.org/Host.aspx?Content=UNdataUse[UNdata], néanmoins la section "Term of Use" mentionne des conditions d'utilisation similaires à la licence *CC BY*.
+Aucune licence prédéfinie clairement sur le site de l'https://www.oecd.org/termsandconditions/[OECD], néanmoins la section "Term of Use" mentionne des conditions d'utilisation similaires à la licence: Creative Commons Attribution 4.0 International License *(CC-BY 4.0)*.
 +
-[quote,http://data.un.org/Host.aspx?Content=UNdataUse]
+*TODO: Effectuer l'attribution tel que décrit dans les règles de l'OECD*
++
+[quote,https://www.oecd.org/termsandconditions/]
 =====
-_"All data and metadata provided on UNdata’s website are available free of charge and may be copied freely, duplicated and further distributed provided that UNdata is cited as the reference."_ *Term of use - UNdata*
-=====
+_"The OECD makes data (the “Data”) *available for use and consultation by the public*.  Data may be subject to restrictions beyond the scope of these Terms and Conditions, either because specific terms apply to those Data or because third parties may have ownership interests. It is the User’s responsibility to verify, either directly in the metadata or, if available, by clicking on the  icon and then referring to the "source" tab, whether the Data is fully or partially owned by third parties and/or whether additional restrictions may apply, and to contact the owner of the Data before incorporating it in your work in order to secure the necessary permissions. The OECD in no way represents or warrants that it owns or controls all rights in all Data, and the OECD will not be liable to any User for any claims brought against the User by third parties in connection with the use of any Data.
 
-* Obtention des fichiers de données
-+
-Nous avons rencontré un problème lors de la récupération des données, le dataset faisant approximativement 2 millions de lignes, le site limitant le téléchargement a 100.000 lignes, il était donc impossible de tout télécharger en un seul bloc.
-+
-Nous avons donc conçu un script bash (https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/scripts/get_data_scripts/population_dataset/download_script.sh[download_script.sh]) permettant de télécharger le dataset au format csv par bloc en le découpant par années.
-+
-Une fois téléchargé, il ne suffira que d'exécuter le deuxième script bash (https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/scripts/get_data_scripts/population_dataset/conversion_files_script.sh[conversion_files_script.sh]) pour rendre les fichiers utilisables par le programme python.
+*Permitted use*
+
+Except where additional restrictions apply as stated above, *You can extract from, download, copy, adapt, print, distribute, share and embed Data for any purpose, even for commercial use. You must give appropriate credit to the OECD by using the citation associated with the relevant Data, or, if no specific citation is available, You must cite the source information using the following format: OECD (year), (dataset name),(data source) DOI or URL (accessed on (date)).* When sharing or licensing work created using the Data, You agree to include the same acknowledgment requirement in any sub-licenses that You grant, along with the requirement that any further sub-licensees do the same."_
+
+*Terms and Conditions - I. Use of Material - (c) Data - OECD*
+=====
 
