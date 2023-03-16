@@ -284,7 +284,7 @@ def build_sql_facts(file_path: str, data_tree: dict, ages: list):
 
 #   Will create SQL Insert files for countries table
 def build_sql_countries(file_path: str, countries: dict):
-    insert_request_to_format = "INSERT INTO COUNTRY VALUES ('{}', '{}');\n"
+    insert_request_to_format = "INSERT INTO COUNTRIES VALUES ('{}', '{}');\n"
 
     current_file_number = 0
     nb_lines_written_in_file = 0
