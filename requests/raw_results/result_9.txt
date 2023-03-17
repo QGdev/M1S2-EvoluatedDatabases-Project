@@ -1,0 +1,24 @@
+SQL> SELECT *
+  2  FROM (SELECT p.country_name, SUM(f.gni*f.population_count) AS gni
+  3  FROM FACTS f, COUNTRIES p, AGE_GROUPS a
+  4  WHERE f.id_country = p.id_country AND f.id_age_group = a.id_age_group AND a.age_group = 'TOTAL' AND f.year=2021 AND f.population_count IS NOT NULL AND f.gni IS NOT NULL
+  5  GROUP BY p.country_name
+  6  ORDER BY gni DESC)
+  7  WHERE ROWNUM <= 10;
+
+COUNTRY_NAME                                            GNI                                                                                                                                                                                                                                                 
+------------------------------------------------ ----------                                                                                                                                                                                                                                                 
+China                                            2,4959E+13                                                                                                                                                                                                                                                 
+United States                                    2,1495E+13                                                                                                                                                                                                                                                 
+India                                            9,2758E+12                                                                                                                                                                                                                                                 
+Japan                                            5,3055E+12                                                                                                                                                                                                                                                 
+Germany                                          4,5370E+12                                                                                                                                                                                                                                                 
+Indonesia                                        3,1216E+12                                                                                                                                                                                                                                                 
+France                                           3,1109E+12                                                                                                                                                                                                                                                 
+Brazil                                           3,0654E+12                                                                                                                                                                                                                                                 
+United Kingdom                                   3,0459E+12                                                                                                                                                                                                                                                 
+Turkey                                           2,6113E+12                                                                                                                                                                                                                                                 
+
+10 lignes sélectionnées.
+
+SQL> SPOOL OFF

@@ -1,0 +1,24 @@
+SQL> SELECT *
+  2  FROM (SELECT p.country_name, SUM(f.population_count * f.co2) AS emission
+  3  FROM FACTS f, COUNTRIES p, AGE_GROUPS a
+  4  WHERE f.id_country = p.id_country AND f.id_age_group = a.id_age_group AND f.year=2021 AND a.age_group='TOTAL' AND f.population_count IS NOT NULL AND f.co2 IS NOT NULL
+  5  GROUP BY p.country_name
+  6  ORDER BY emission)
+  7  WHERE ROWNUM <= 10;
+
+COUNTRY_NAME                                       EMISSION                                                                                                                                                                                                                                                 
+------------------------------------------------ ----------                                                                                                                                                                                                                                                 
+Malta                                            1866548,41                                                                                                                                                                                                                                                 
+Iceland                                           3205128,1                                                                                                                                                                                                                                                 
+Cyprus                                           4842125,44                                                                                                                                                                                                                                                 
+Latvia                                           6766659,88                                                                                                                                                                                                                                                 
+Costa Rica                                       8014380,26                                                                                                                                                                                                                                                 
+Luxembourg                                       8358548,02                                                                                                                                                                                                                                                 
+Estonia                                          10487046,1                                                                                                                                                                                                                                                 
+Slovenia                                         12732620,7                                                                                                                                                                                                                                                 
+Lithuania                                          14169705                                                                                                                                                                                                                                                 
+Croatia                                          16045936,9                                                                                                                                                                                                                                                 
+
+10 lignes sélectionnées.
+
+SQL> SPOOL OFF
