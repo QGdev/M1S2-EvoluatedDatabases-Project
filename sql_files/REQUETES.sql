@@ -12,7 +12,7 @@ SELECT p.country_name, f.year, sum(hdi) from COUNTRIES p, FACTS f WHERE p.id_cou
 
 --Cumul du co2 produit par pays et par année
 
-SELECT p.country_name, f.year, SUM(f.co2), SUM(SUM(f.co2)), OVER (order by f.year ROWS UNBOUNDED PRECEDING) FROM COUNTRIES p, FACTS f WHERE f.id_country = p.id_country GROUP BY f.id_country, f.year;
+SELECT p.country_name, f.year, f.co2 *f.population_count AS CO2, SUM(f.co2 * f.population_count) OVER (order by f.year ROWS UNBOUNDED PRECEDING) AS CUMUL_CO2 FROM COUNTRIES p, FACTS f, AGE_GROUPS a WHERE f.id_country = p.id_country AND f.id_age_group = a.id_age_group AND a.age_group = 'TOTAL' AND f.population_count IS NOT NULL AND f.co2 IS NOT NULL ORDER BY p.country_name, f.year;
 
 --Ensemble des pays trié par moyenne des RNB par année
 
