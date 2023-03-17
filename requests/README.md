@@ -12,4 +12,4 @@
 10. [Classement des années les plus générative en CO²](https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/requests/request_10.sql) (WINDOW + RANK)
 
 
-Les résultats bruts des requêtes ci-dessus sont disponibles dans le dossier [raw_results](https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/requests).
+Les résultats bruts des requêtes ci-dessus sont disponibles dans le dossier [raw_results](https://gitlab.univ-nantes.fr/E192263G/m1s2-evoluateddatabases-project/-/blob/main/requests/raw_results).
