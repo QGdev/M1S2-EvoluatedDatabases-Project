@@ -9,7 +9,7 @@ from io import TextIOWrapper
 #   Advanced Databases Project
 #
 #   Converts CSV files into INSERTS SQL file(s)
-#   for the population dataset from UNdata
+#   for the both datasets
 #
 #   Author: Quentin GOMES DOS REIS
 #
