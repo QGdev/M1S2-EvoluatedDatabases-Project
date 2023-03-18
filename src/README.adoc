@@ -1,5 +1,5 @@
 
-=== Les 3 datasets utilisés
+=== Les 2 datasets utilisés
 
 - https://www.kaggle.com/datasets/iamsouravbanerjee/human-development-index-dataset[IDH, GNI CO² par pays par année] 
 * Licence utilisée: Creative Commons Attribution 3.0 IGO *(CC BY 3.0 IGO)*
