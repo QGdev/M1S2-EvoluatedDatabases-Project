@@ -4,7 +4,6 @@ import csv
 import sys
 import re
 from io import TextIOWrapper
-from country_names_to_a3 import country_to_a3
 
 #
 #   Advanced Databases Project
