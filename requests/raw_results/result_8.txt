@@ -3,21 +3,21 @@ SQL> SELECT *
   3  FROM FACTS f, COUNTRIES p, AGE_GROUPS a
   4  WHERE f.id_country = p.id_country AND f.id_age_group = a.id_age_group AND f.year=2021 AND a.age_group='TOTAL' AND f.population_count IS NOT NULL AND f.co2 IS NOT NULL
   5  GROUP BY p.country_name
-  6  ORDER BY emission)
+  6  ORDER BY emission DESC)
   7  WHERE ROWNUM <= 10;
 
-COUNTRY_NAME                                       EMISSION                                                                                                                                                                                                                                                 
------------------------------------------------- ----------                                                                                                                                                                                                                                                 
-Malta                                            1866548,41                                                                                                                                                                                                                                                 
-Iceland                                           3205128,1                                                                                                                                                                                                                                                 
-Cyprus                                           4842125,44                                                                                                                                                                                                                                                 
-Latvia                                           6766659,88                                                                                                                                                                                                                                                 
-Costa Rica                                       8014380,26                                                                                                                                                                                                                                                 
-Luxembourg                                       8358548,02                                                                                                                                                                                                                                                 
-Estonia                                          10487046,1                                                                                                                                                                                                                                                 
-Slovenia                                         12732620,7                                                                                                                                                                                                                                                 
-Lithuania                                          14169705                                                                                                                                                                                                                                                 
-Croatia                                          16045936,9                                                                                                                                                                                                                                                 
+COUNTRY_NAME                                       EMISSION                     
+------------------------------------------------ ----------                     
+China                                            1,0568E+10                     
+United States                                    4725457874                     
+India                                            2490556254                     
+Japan                                            1022835966                     
+Germany                                           639789612                     
+Saudi Arabia                                      612876058                     
+South Korea                                       603149861                     
+Indonesia                                         586752261                     
+Canada                                            542977603                     
+Brazil                                            469050707                     
 
 10 lignes sélectionnées.
 
