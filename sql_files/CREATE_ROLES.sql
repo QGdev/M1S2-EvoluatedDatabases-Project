@@ -11,38 +11,39 @@
 --  ainsi que les règles de la VPD.
 ------------------------------------------------------
 
---  Création des rôles
-CREATE ROLE France;
-CREATE ROLE Germany;
-CREATE ROLE "United States";
+--  Création de la table des users
+DROP TABLE USER;
+CREATE TABLE USER (
+    user_name VARCHAR(48) NOT NULL,
+    id_country VARCHAR(3) NOT NULL,
+    CONSTRAINT pk_user PRIMARY KEY (user_name)
+);
 
---  Attribution des droits d'exécution sur le package de remplissage du contexte
-GRANT EXECUTE ON set_country_ctx_pkg TO France;
-GRANT EXECUTE ON set_country_ctx_pkg TO Germany;
-GRANT EXECUTE ON set_country_ctx_pkg TO "United States";
+INSERT INTO USER ('', 'FRA');
+INSERT INTO USER ('', 'BEL');
 
 --  Création du contexte et du package
-CREATE OR REPLACE CONTEXT country_ctx USING set_country_ctx_pkg;
-CREATE OR REPLACE PACKAGE set_country_ctx_pkg IS
+CREATE OR REPLACE CONTEXT user_ctx USING set_user_ctx_pkg;
+CREATE OR REPLACE PACKAGE set_user_ctx_pkg IS
     PROCEDURE set_country;
 END;
 /
 
-CREATE OR REPLACE PACKAGE BODY set_country_ctx_pkg IS
+CREATE OR REPLACE PACKAGE BODY set_user_ctx_pkg IS
     PROCEDURE set_country
     IS
         id_ctx VARCHAR(3);
         name_ctx VARCHAR(48);
     BEGIN
         name_ctx:=SYS_CONTEXT('USERENV', 'SESSION_USER');
-        DBMS_SESSION.SET_CONTEXT('country_ctx','country_name',name_ctx);
+        DBMS_SESSION.SET_CONTEXT('user_ctx','user_name',name_ctx);
 
         SELECT id_country INTO id_ctx
-        FROM COUNTRIES
-        WHERE country_name = name_ctx;
-        DBMS_SESSION.SET_CONTEXT('country_ctx','id_country',id_ctx);
+        FROM USER
+        WHERE user_name = UPPER(name_ctx);
+        DBMS_SESSION.SET_CONTEXT('user_ctx','id_country',id_ctx);
     END set_country;
-END set_country_ctx_pkg;
+END set_user_ctx_pkg;
 /
 
 --  Fonction qui assure qu'un utilisateur reçoit les valeurs de requête le concernant
@@ -55,7 +56,7 @@ RETURN VARCHAR
 IS
     return_val VARCHAR(400);
 BEGIN
-    return_val := 'id_country = SYS_CONTEXT("country_ctx","id_country")';
+    return_val := 'id_country = SYS_CONTEXT("user_ctx","id_country")';
     RETURN return_val;
 END auth_country;
 /
