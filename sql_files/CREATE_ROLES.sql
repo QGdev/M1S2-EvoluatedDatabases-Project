@@ -16,11 +16,12 @@ DROP TABLE USER;
 CREATE TABLE USER (
     user_name VARCHAR(48) NOT NULL,
     id_country VARCHAR(3) NOT NULL,
-    CONSTRAINT pk_user PRIMARY KEY (user_name)
+    CONSTRAINT pk_user PRIMARY KEY (user_name),
+    CONSTRAINT fk_user FOREIGN KEY (id_country) REFERENCES COUNTRIES(id_country) ON DELETE CASCADE
 );
 
-INSERT INTO USER ('', 'FRA');
-INSERT INTO USER ('', 'BEL');
+INSERT INTO USER VALUES ('', 'FRA');
+INSERT INTO USER VALUES ('', 'BEL');
 
 --  Création du contexte et du package
 CREATE OR REPLACE CONTEXT user_ctx USING set_user_ctx_pkg;
