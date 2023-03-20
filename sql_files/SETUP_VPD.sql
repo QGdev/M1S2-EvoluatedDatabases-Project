@@ -28,9 +28,9 @@ GRANT SELECT ON AGE_GROUPS TO admi22;
 GRANT SELECT ON AGE_GROUPS TO admi28;
 GRANT SELECT ON AGE_GROUPS TO admi32;
 
-GRANT SELECT, INSERT, DELETE ON FACTS TO admi22;
-GRANT SELECT, INSERT, DELETE ON FACTS TO admi28;
-GRANT SELECT, INSERT, DELETE ON FACTS TO admi32;
+GRANT SELECT, INSERT, DELETE ON admi18.FACTS TO admi22;
+GRANT SELECT, INSERT, DELETE ON admi18.FACTS TO admi28;
+GRANT SELECT, INSERT, DELETE ON admi18.FACTS TO admi32;
 
 GRANT SELECT ON USERS TO admi22;
 GRANT SELECT ON USERS TO admi28;
@@ -74,7 +74,7 @@ RETURN VARCHAR
 IS
     return_val VARCHAR(400);
 BEGIN
-    return_val := 'id_country = SYS_CONTEXT("user_ctx","id_country")';
+    return_val := 'id_country IN (SELECT id_country INTO id_ctx FROM admi18.USERS WHERE user_name = UPPER(name_ctx);)';
     RETURN return_val;
 END auth_country;
 /
@@ -98,6 +98,7 @@ BEGIN
         policy_name => 'country_policy',
         function_schema => 'admi18', -- NOM DU COMPTE
         policy_function => 'auth_country',
-        statement_types => 'select, insert, update, delete');
+        statement_types => 'select, insert, update, delete',
+        sec_relevant_cols => 'id_country');
 END;
 /
