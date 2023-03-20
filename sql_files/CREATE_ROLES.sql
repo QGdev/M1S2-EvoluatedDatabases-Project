@@ -12,15 +12,33 @@
 ------------------------------------------------------
 
 --  Création de la table des users
-DROP TABLE USER;
-CREATE TABLE USER (
+DROP TABLE USERS;
+CREATE TABLE USERS (
     user_name VARCHAR(48) NOT NULL,
     id_country VARCHAR(3) NOT NULL,
-    CONSTRAINT pk_user PRIMARY KEY (user_name)
+    CONSTRAINT pk_user PRIMARY KEY (user_name),
+    CONSTRAINT fk_user FOREIGN KEY (id_country) REFERENCES COUNTRIES(id_country) ON DELETE CASCADE
 );
 
-INSERT INTO USER ('', 'FRA');
-INSERT INTO USER ('', 'BEL');
+GRANT SELECT ON COUNTRIES TO admi22;
+GRANT SELECT ON COUNTRIES TO admi28;
+GRANT SELECT ON COUNTRIES TO admi32;
+
+GRANT SELECT ON AGE_GROUPS TO admi22;
+GRANT SELECT ON AGE_GROUPS TO admi28;
+GRANT SELECT ON AGE_GROUPS TO admi32;
+
+GRANT SELECT, INSERT, DELETE ON FACTS TO admi22;
+GRANT SELECT, INSERT, DELETE ON FACTS TO admi28;
+GRANT SELECT, INSERT, DELETE ON FACTS TO admi32;
+
+GRANT SELECT ON USERS TO admi22;
+GRANT SELECT ON USERS TO admi28;
+GRANT SELECT ON USERS TO admi32;
+
+INSERT INTO USERS VALUES ('ADMI22', 'BEL');
+INSERT INTO USERS VALUES ('ADMI28', 'FRA');
+INSERT INTO USERS VALUES ('ADMI32', 'FRA');
 
 --  Création du contexte et du package
 CREATE OR REPLACE CONTEXT user_ctx USING set_user_ctx_pkg;
@@ -39,7 +57,7 @@ CREATE OR REPLACE PACKAGE BODY set_user_ctx_pkg IS
         DBMS_SESSION.SET_CONTEXT('user_ctx','user_name',name_ctx);
 
         SELECT id_country INTO id_ctx
-        FROM USER
+        FROM admi18.USERS
         WHERE user_name = UPPER(name_ctx);
         DBMS_SESSION.SET_CONTEXT('user_ctx','id_country',id_ctx);
     END set_country;
@@ -61,14 +79,25 @@ BEGIN
 END auth_country;
 /
 
-BEGIN
+
+GRANT EXECUTE ON set_user_ctx_pkg TO admi22;
+GRANT EXECUTE ON set_user_ctx_pkg TO admi28;
+GRANT EXECUTE ON set_user_ctx_pkg TO admi32;
+
+GRANT EXECUTE ON auth_country TO admi22;
+GRANT EXECUTE ON auth_country TO admi28;
+GRANT EXECUTE ON auth_country TO admi32;
+
+
+EXECUTE DBMS_RLS.DROP_POLICY('admi18', 'FACTS', 'country_policy'); 
+
+BEGIN  
     DBMS_RLS.ADD_POLICY (
-        object_schema => 'admi', -- NOM DU COMPTE
-        object_name => 'country',
+        object_schema => 'admi18', -- NOM DU COMPTE
+        object_name => 'FACTS',
         policy_name => 'country_policy',
-        function_schema => 'admi', -- NOM DU COMPTE
+        function_schema => 'admi18', -- NOM DU COMPTE
         policy_function => 'auth_country',
-        statement_types => 'select, insert, update, delete'
-    );
+        statement_types => 'select, insert, update, delete');
 END;
 /
