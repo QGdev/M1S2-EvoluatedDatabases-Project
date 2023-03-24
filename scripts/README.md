@@ -1,6 +1,6 @@
-# Convertion et Agrégation des données :
+# Convertion et agrégation des données :
 
-Afin de créer notre entrepôt de données, nous avons dû convertir chaque CSV provenant de nos deux jeux de données en un ou plusieurs fichiers SQL contenant des insertions. Pour cela, nous avons utilisé le script Python [scripts/convert_csv_to_sql.py](scripts/convert_csv_to_sql.py). Ce script prend en paramètre les chemins vers chacun des deux fichiers CSV de nos jeux de données et le chemin vers le répertoire qui contiendra les fichiers SQL produits en sortie.
+Afin de créer notre entrepôt de données, nous avons dû convertir chaque CSV provenant de nos deux jeux de données en un ou plusieurs fichiers SQL contenant des insertions. Pour cela, nous avons utilisé le script Python [convert_everything.py](convert_everything.py). Ce script prend en paramètre les chemins vers chacun des deux fichiers CSV de nos jeux de données et le chemin vers le répertoire qui contiendra les fichiers SQL produits en sortie.
 
 ## Comment l'exécuter ?
 
