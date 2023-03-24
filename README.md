@@ -7,14 +7,15 @@ Nous avons réalisé un entrepôt de données dans l'objectif de manipuler des r
 
 ## Fonctionnalités :
 
-- Schéma en étoile
 - [Scripts Python pour l'agrégation des jeux de données et la génération d'insertions SQL](scripts)
 - [10 requêtes avec leurs résultats et visualisations](requests)
 - [Contrôle d'accès avec 2 VPD (Posgresql)](sql_files/postgresql/SETUP_POLICIES.sql)
 
 ## Modèle de données :
 
-Nous avons utilisé 2 jeux de données pour la création de cet entrepôt de données. Les informations détaillées sont retrouvables dans le dossier [src](src).
+Nous avons utilisé 2 jeux de données pour la création de cet entrepôt de données. Les informations détaillées sont retrouvables dans le dossier [src](src). Les données sont organisées dans un schéma en étoile, comme dans l'illustration suivante :
+
+![](schema/db-schema.png)
 
 ## Contributeurs :
 
