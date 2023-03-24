@@ -2,26 +2,19 @@
 
 ## Description :
 
-Notre projet de base de données évoluées est la réalisation d'un entrepôt de données dans l'objectif de magnipuler les requêtes OLAP et d'utiliser toutes nos connaissances apprisent lors des cours de base de données. L'entrepôt de données contiendra des données sur la production de co2 de différents pays et des données économiques sur les pays notamment le pib, l'idh.
+Ce projet rentre dans le cadre du cours de Bases de données évoluées (X2I1010).
+Nous avons réalisé un entrepôt de données dans l'objectif de manipuler des requêtes OLAP et de mettre en oeuvre nos compétences acquises durant ce cours. L'entrepôt de données contient les émissions de CO2 dans le monde en comparaison avec le RNB/GNI et l’IDH pour chaque pays.
 
 ## Fonctionnalités :
 
-[Énumérez les principales fonctionnalités de votre base de données évolué ici. Par exemple :]
-
-- Gestion des produits (ajout, modification, suppression)
-- Gestion des commandes (création, annulation, suivi)
-- Gestion des clients (ajout, modification, suppression)
-- Gestion des paiements (validation, annulation, remboursement)
+- Schéma en étoile
+- [Scripts Python pour l'agrégation des jeux de données et la génération d'insertions SQL](scripts)
+- [10 requêtes avec leurs résultats et visualisations](requests)
+- [Contrôle d'accès avec 2 VPD (Posgresql)](sql_files/postgresql/SETUP_POLICIES.sql)
 
 ## Modèle de données :
 
-Pour remplir notre entrepôt de données, nous avons utiliser 2 datasets:
-* Données sur le co2
-* IDH et PIB
-
-## Langage de programmation et outils :
-
-[Indiquez le langage de programmation que vous utilisez pour développer votre base de données évolué, ainsi que les outils et les bibliothèques que vous utilisez pour la création, le déploiement et la maintenance de la base de données.]
+Nous avons utilisé 2 jeux de données pour la création de cet entrepôt de données. Les informations détaillées sont retrouvables dans le dossier [src](src).
 
 ## Contributeurs :
 
