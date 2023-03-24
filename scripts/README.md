@@ -47,5 +47,6 @@ Le script va donc générer trois types de fichiers SQL :
 * Un fichier SQL pour la table `AGE_GROUPS` contenant les insertions SQL pour remplir la table `AGE_GROUPS` avec les données de l'arbre de données.
 * Un fichier SQL pour la table `FACTS` contenant les insertions SQL pour remplir la table `FACTS` avec les données de l'arbre de données, il y en résultera un tuple par pays, par année et par tranche d'âge.
 
-
+## Crédits
+Les différents schémas ont été réalisées avec [diagrams.net](https://app.diagrams.net/).
 
