@@ -26,15 +26,11 @@ Pour remplir notre entrepôt de données, nous avons utiliser 2 datasets:
 ## Contributeurs :
 
 4 contributeurs pour ce projet :
-* Pouplin Gabriel
-* Meunier Rodrigue
-* Lécrivain Matthéo
-* Gomes Dos Reis Quentin
+* GOMES DOS REIS Quentin
+* LECRIVAIN Matthéo
+* MEUNIER Rodrigue
+* POUPLIN Gabriel
 
 ## Licence :
 
-[Indiquez la licence sous laquelle votre projet de base de données évolué est publié.]
-
-## Remerciements :
-
-[Remerciez les personnes ou les organisations qui vous ont aidé à réaliser votre projet de base de données évolué.]
+Le dataset est publié sous la licence [CC-BY 3.0 IGO](https://creativecommons.org/licenses/by/3.0/igo/). Voir le fichier [README](src/README.md) des sources du projet pour le détail des licences des datasets utilisés.
