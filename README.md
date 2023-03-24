@@ -30,4 +30,4 @@ Nous avons utilisé 2 jeux de données pour la création de cet entrepôt de don
 
 ## Licence :
 
-Le dataset est publié sous la licence [CC-BY 3.0 IGO](https://creativecommons.org/licenses/by/3.0/igo/). Voir le fichier [README](src/README.md) des sources du projet pour le détail des licences des datasets utilisés.
+Ce jeu de données est publié sous la licence [CC-BY 3.0 IGO](https://creativecommons.org/licenses/by/3.0/igo/). Voir le fichier [README](src/README.md) des sources du projet pour le détail des licences des jeux de données utilisés.
