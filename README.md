@@ -12,7 +12,7 @@ Nous avons réalisé un entrepôt de données dans l'objectif de manipuler des r
   - [Les résultats bruts](requests/raw_results)
   - [Les résultats sous format CSV](requests/csv_results)
   - [Les visualisations](requests/visualisations)
-- [Contrôle d'accès avec 2 VPD (Posgresql)](sql_files/postgresql/SETUP_POLICIES.sql)
+- [Contrôle d'accès avec 2 VPD (PostgreSQL)](sql_files/postgresql/SETUP_POLICIES.sql)
 
 ## Modèle de données :
 
