@@ -12,4 +12,6 @@
 10. [Classement des années les plus générative en CO²](request_10.sql) (WINDOW + RANK)
 
 
-Les résultats bruts des requêtes ci-dessus sont disponibles dans le dossier [raw_results](raw_results).
+Les résultats bruts des requêtes ci-dessus sont disponibles dans le dossier [raw_results](raw_results).\
+Les résultats au format CSV des requêtes ci-dessus sont disponibles dans le dossier [csv_results](csv_results).\
+Les visualisations des requêtes ci-dessus sont disponibles dans le dossier [visualisations](visualisations).
